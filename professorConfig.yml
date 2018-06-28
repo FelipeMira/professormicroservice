@@ -1,0 +1,19 @@
+  mongoProfessor:
+    image: mongo
+    restart: always
+    hostname: mongodb
+    command: mongod --port 8082
+    ports:
+      - 8082:8082
+
+  java8Professor:
+    image: openjdk:8-jre
+    ports:
+    - "8087:8087"
+    volumes:
+    - "/Users/felipemira/Spring-Workspace/professor/target:/usr/src/myapp"
+    working_dir: /usr/src/myapp
+    command: java -jar professor.jar
+    links:
+    - mongoProfessor
+    
